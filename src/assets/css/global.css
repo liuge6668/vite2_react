@@ -1,0 +1,45 @@
+/* src/assets/css/global.css */
+
+/* 清除默认样式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 设置全局字体 */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+}
+
+/* 链接样式 */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  color: #1890ff;
+}
+
+/* 按钮基础样式 */
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* 容器最大宽度限制 */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}

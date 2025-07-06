@@ -1,7 +1,55 @@
 {
   "files": [],
   "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ],
+  "compilerOptions": {
+    "baseUrl": "./src", // 设置基础目录为 src
+    "paths": {
+      "@/*": [
+        "./*"
+      ], // 配置路径别名 @ 指向 src 目录
+      "common/*": [
+        "common/*"
+      ],
+      "components/*": [
+        "components/*"
+      ],
+      "pages": [
+        "pages/*"
+      ],
+      "utils/*": [
+        "utils/*"
+      ],
+      "types/*": [
+        "types/*"
+      ],
+      "assets/*": [
+        "assets/*"
+      ],
+    },
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "jsx": "react",
+    "outDir": "./dist",
+    "rootDir": "./src"
+  },
+  "include": [
+    "src/**/*"
   ]
 }

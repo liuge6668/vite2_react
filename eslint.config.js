@@ -6,6 +6,7 @@ import reactPlugin from "eslint-plugin-react" // 导入 ESLint 的 React 插件�
 import reactHooksPlugin from "eslint-plugin-react-hooks" // 导入 ESLint 的 React Hooks 插件，用于检查 React Hooks 的使用是否符合规范
 import babelParser from "@babel/eslint-parser" // 导入 Babel 的 ESLint 解析器，用于支持解析特定语法（例如一些通过 Babel 转换的语法）
 import globals from "globals" // 导入 ESLint 的全局变量定义，这里包含了不同环境（如 es2022、浏览器、Node 等）下的全局变量定义
+import eslintConfigPrettier from "eslint-config-prettier" // 导入 ESLint 的 Prettier 插件，用于格式化代码
 
 const OFF = 0 // 定义常量 OFF，表示关闭规则，对应 ESLint 规则配置中的 "off" 或者数值 0
 const WARN = 1 // 定义常量 WARN，表示开启规则，使用警告级别的错误（warn），对应 ESLint 规则配置中的 "warn" 或者数值 1，这种错误不会导致程序退出
@@ -100,7 +101,20 @@ const flatConfig = [
     }
   },
   {
-    ignores: ["node_modules", "build", "dist"] // 配置忽略的文件或目录，不会进行 ESLint 检查
+    ignores: [
+      "node_modules",
+      "build",
+      "dist",
+      "coverage",
+      "public",
+      "*.config.js",
+      ".cz-config.json",
+      ".czrc",
+      ".editorconfig",
+      ".prettierrc.cjs",
+      "commitlint.config.cjs",
+      "vite.config.ts"
+    ] // 配置忽略的文件或目录，不会进行 ESLint 检查
   }
 ]
 
@@ -108,6 +122,7 @@ const flatConfig = [
 export default [
   eslint.configs.recommended,
   eslintPluginPrettierRecommended,
+  eslintConfigPrettier,
   ...flatConfig,
   ...customTsFlatConfig
 ]
