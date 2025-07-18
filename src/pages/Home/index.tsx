@@ -1,27 +1,27 @@
-import React, { useEffect } from "react"
-import useHox from "models/useHox"
-import { useRequest, useMount } from "ahooks"
-import { Button } from "antd"
-import { getHoxData } from "../../api/home"
-import style from "./styles.module.css"
+import React from 'react'
+import useHox from 'models/useHox'
+import { useRequest, useMount } from 'ahooks'
+import { Button } from 'antd'
+import { getHoxData } from '../../api/home'
+import style from './styles.module.css'
 
 const HomePage: React.FC = () => {
-  const [useGlocalStore] = useHox;
-  const { data, updateData, recoverData } = useGlocalStore();
+  const [useGlocalStore] = useHox
+  const { data, updateData, recoverData } = useGlocalStore()
   const { count } = data
   const { run } = useRequest(getHoxData, {
     manual: true,
-    formatResult(res:any) {
+    formatResult(res: any) {
       return {
         data: res.data
       }
     },
-    onSuccess(res:any) {
+    onSuccess(res: any) {
       console.log(res)
       updateData(res.data)
     }
   })
-  
+
   useMount(() => {
     run()
   })

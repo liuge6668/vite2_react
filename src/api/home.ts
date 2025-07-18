@@ -1,7 +1,7 @@
-import service from '../utils/request';
+import service from '../utils/request'
 
 const getHoxData = () => {
-  return service.get('/getHoxData');
-};
+  return service.get('/getHoxData')
+}
 
-export { getHoxData };
+export { getHoxData }

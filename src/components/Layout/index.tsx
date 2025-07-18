@@ -1,6 +1,6 @@
-import React from "react"
-import { Layout as AntdLayout, Menu, Breadcrumb, theme } from "antd"
-import style from "./styles.module.css"
+import React from 'react'
+import { Layout as AntdLayout, Menu, Breadcrumb, theme } from 'antd'
+import style from './styles.module.css'
 
 const { Header, Content, Sider } = AntdLayout
 
@@ -22,22 +22,16 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <Menu
             theme='light'
             mode='inline'
-            defaultSelectedKeys={["home"]}
+            defaultSelectedKeys={['home']}
             items={[
-              { key: "home", label: "首页" },
-              { key: "about", label: "关于我们" }
+              { key: 'home', label: '首页' },
+              { key: 'about', label: '关于我们' }
             ]}
           />
         </Sider>
         <AntdLayout className={style.layoutMid}>
-          <Breadcrumb
-            items={[{ title: "Home" }, { title: "List" }, { title: "App" }]}
-            style={{ margin: "16px 0" }}
-          />
-          <Content
-            className={style.layoutMain}
-            style={{ background: colorBgContainer, borderRadius: borderRadiusLG }}
-          >
+          <Breadcrumb items={[{ title: 'Home' }, { title: 'List' }, { title: 'App' }]} style={{ margin: '16px 0' }} />
+          <Content className={style.layoutMain} style={{ background: colorBgContainer, borderRadius: borderRadiusLG }}>
             {children}
           </Content>
           <AntdLayout />
