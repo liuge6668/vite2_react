@@ -24,14 +24,16 @@ export default defineConfig({
     },
   },
   resolve: {
+    extensions: ['.tsx', '.ts', '.jsx', '.js', '.less', '.css'],
     alias: {
-      '@': path.resolve(__dirname, './src'),
-      'common': path.resolve(__dirname, './common'),
-      'components': path.resolve(__dirname, './components'),
-      'pages': path.resolve(__dirname, './pages'),
-      'utils': path.resolve(__dirname, './utils'),
-      'types': path.resolve(__dirname, './types'),
-      'assets': path.resolve(__dirname, './assets'),
+      '@': path.join(__dirname, 'src'),
+      'common': path.join(__dirname, 'src/common'),
+      'components': path.join(__dirname, 'src/components'),
+      'pages': path.join(__dirname, 'src/pages'),
+      'utils': path.join(__dirname, 'src/utils'),
+      'types': path.join(__dirname, 'src/types'),
+      'assets': path.join(__dirname, 'src/assets'),
+      'models': path.join(__dirname, 'src/models'),
     },
   },
 });

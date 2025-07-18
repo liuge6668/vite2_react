@@ -1,26 +1,34 @@
-import React, { useCallback } from "react"
-import { createGlobalStore } from "hox"
+import React, { useCallback, useState } from "react";
+import { createGlobalStore } from "hox";
 
-const useHox = (initData: any) => {
-  const [data, setData] = React.useState(initData)
-  const updateData = useCallback((newProps: any) => {
-    setData((v: any) => ({ ...v, ...newProps }))
-  }, [])
+// 定义状态类型
+interface HoxState {
+  count: number;
+  name: string;
+  age: number;
+}
+
+// 初始状态
+const initData: HoxState = { count: 10, name: "hox", age: 18 };
+
+const useHox = () => {
+  const [data, setData] = useState<HoxState>(initData);
+
+  const updateData = useCallback((newProps: Partial<HoxState>) => {
+    setData((v) => ({ ...v, ...newProps }));
+  }, []);
+
   const recoverData = useCallback(() => {
-    setData(initData)
-  }, [])
+    setData(initData);
+  }, []);
 
   return {
     data,
     updateData,
-    recoverData
-  }
-}
+    recoverData,
+  };
+};
 
 export default createGlobalStore(() => {
-  return useHox({
-    count: 0,
-    name: "hox",
-    age: 18
-  })
-})
+  return useHox();
+});

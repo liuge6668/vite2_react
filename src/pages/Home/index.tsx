@@ -1,27 +1,27 @@
 import React, { useEffect } from "react"
-import useHox from "../../models/useHox"
+import useHox from "models/useHox"
 import { useRequest, useMount } from "ahooks"
 import { Button } from "antd"
-import ButtonGroup from "antd/es/button/button-group"
 import { getHoxData } from "../../api/home"
 import style from "./styles.module.css"
 
 const HomePage: React.FC = () => {
-  const [useGlocalStore] = useHox
-  const { data, updateData, recoverData } = useGlocalStore()
+  const [useGlocalStore] = useHox;
+  const { data, updateData, recoverData } = useGlocalStore();
   const { count } = data
-  const { run, data: requestData } = useRequest(getHoxData(), {
+  const { run } = useRequest(getHoxData, {
     manual: true,
-    formatResult(res) {
+    formatResult(res:any) {
       return {
         data: res.data
       }
     },
-    onSuccess(res) {
+    onSuccess(res:any) {
+      console.log(res)
       updateData(res.data)
     }
   })
-
+  
   useMount(() => {
     run()
   })
@@ -32,7 +32,7 @@ const HomePage: React.FC = () => {
       <p>欢迎来到首页！</p>
       <span>
         <p>count: {data.count}</p>
-        <ButtonGroup>
+        <span>
           <Button
             onClick={() => {
               updateData({ count: count + 1 })
@@ -55,7 +55,7 @@ const HomePage: React.FC = () => {
             recover
           </Button>
           <Button onClick={run}>req</Button>
-        </ButtonGroup>
+        </span>
       </span>
     </div>
   )
