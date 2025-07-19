@@ -13,7 +13,8 @@
     "eslint": "eslint --max-warnings=0",
     "check": "tsc && npx lint-staged",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\" \"src/**/*.{css,scss,less}\"",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "prettier": "./.prettierrc"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
