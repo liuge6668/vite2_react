@@ -27,8 +27,8 @@ a:hover {
 /* 按钮基础样式 */
 button {
   cursor: pointer;
-  outline: none;
   border: none;
+  outline: none;
   transition: all 0.2s ease;
 }
 

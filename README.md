@@ -360,7 +360,7 @@ npm run test:coverage
 ### 2. 创建.vscode文件夹，在里面创建settings.json文件，并添加相应内容，以jsonLint为例
 
 ```json
-"jsonlint.validate": true,
+  "jsonlint.validate": true,
   "jsonlint.rcConfig": true,
   "jsonlint.options": {
     "indent": 2,

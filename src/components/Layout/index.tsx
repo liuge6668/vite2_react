@@ -1,5 +1,6 @@
 import React from 'react'
 import { Layout as AntdLayout, Menu, Breadcrumb, theme } from 'antd'
+import { useNavigate } from 'react-router-dom'
 import style from './styles.module.css'
 
 const { Header, Content, Sider } = AntdLayout
@@ -12,6 +13,21 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const {
     token: { colorBgContainer, borderRadiusLG }
   } = theme.useToken()
+
+  const navigate = useNavigate()
+  const handleMenuClick = (item: { key: string }) => {
+    switch (item.key) {
+      case 'home':
+        navigate('/')
+        break
+      case 'about':
+        navigate('/about')
+        break
+      default:
+        break
+    }
+  }
+
   return (
     <AntdLayout className={style.layoutContainer}>
       <Header className={style.layoutHeader}>
@@ -27,6 +43,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               { key: 'home', label: '首页' },
               { key: 'about', label: '关于我们' }
             ]}
+            onClick={handleMenuClick}
           />
         </Sider>
         <AntdLayout className={style.layoutMid}>
