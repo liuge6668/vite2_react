@@ -1,7 +1,8 @@
 // src/routers.tsx
 import React, { lazy, Suspense, FC } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
-import { Layout } from '../components'
+import BasicLayout from '../layout/BasicLayout'
+import Page from '../layout/Page'
 import Loading from 'components/Loading'
 
 // 定义路由配置类型
@@ -96,7 +97,7 @@ const AppRoutes: FC = () => {
       const useLayout = route.layout !== false && (parentLayout ?? true)
 
       return (
-        <Route key={route.key} path={route.path} element={useLayout ? <Layout menuItems={menuItems}>{routeElement}</Layout> : routeElement}>
+        <Route key={route.key} path={route.path} element={useLayout ? <BasicLayout menuItems={menuItems}>{routeElement}</BasicLayout> : routeElement}>
           {route.children && renderRoutes(route.children, route.layout)} {/* 传递当前路由的 layout 属性 */}
         </Route>
       )
@@ -104,10 +105,12 @@ const AppRoutes: FC = () => {
   }
 
   return (
-    <Routes>
-      {renderRoutes(routes)}
-      <Route path='*' element={<Navigate to='/404' replace />} />
-    </Routes>
+    <Page>
+      <Routes>
+        {renderRoutes(routes)}
+        <Route path='*' element={<Navigate to='/404' replace />} />
+      </Routes>
+    </Page>
   )
 }
 

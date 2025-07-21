@@ -1,73 +1,41 @@
 import React from 'react'
-import { Layout as AntdLayout, Menu, Breadcrumb, theme } from 'antd'
-import { useNavigate } from 'react-router-dom'
-import style from './styles.module.css'
+import { Layout as AntdLayout, Menu, Breadcrumb, theme, Flex, Typography } from 'antd'
+import style from './styles.module.less'
 
 const { Header, Content, Sider } = AntdLayout
 
 interface LayoutProps {
   children: React.ReactNode
   menuItems: any[]
+  menuClick: (item: any) => void
+  logo: any
+  // logout: any
+  // sideMenu: any
+  // breadcrumb: any
+  // toolbar: any
 }
 
-interface MenuItem {
-  key: string
-  label: string
-  path?: string
-  children?: MenuItem[]
-}
-
-const Layout: React.FC<LayoutProps> = ({ children, menuItems }) => {
+const Layout: React.FC<LayoutProps> = ({ children, ...config }) => {
+  const { menuClick, menuItems, logo } = config
   const {
     token: { colorBgContainer, borderRadiusLG }
   } = theme.useToken()
 
-  const navigate = useNavigate()
-
-  const handleMenuClick = ({ key }: { key: string }) => {
-    const fullPath = getMenuItemFullPath(menuItems, key)
-    if (fullPath) {
-      navigate(fullPath)
-    }
-  }
-
-  // 递归查找并拼接完整路径
-  const getMenuItemFullPath = (items: MenuItem[], targetKey: string, parentPath = ''): string | null => {
-    for (const item of items) {
-      const currentPath = item.path ? `${parentPath}/${item.path}`.replace(/\/+/g, '/') : parentPath
-
-      if (item.key === targetKey) {
-        return currentPath
-      }
-
-      if (item.children) {
-        const foundPath = getMenuItemFullPath(item.children, targetKey, currentPath)
-        if (foundPath) {
-          return foundPath
-        }
-      }
-    }
-    return null
-  }
-
-  const generateMenuItems = (items: MenuItem[]): any[] => {
-    return items
-      .filter(item => item.path)
-      .map(item => ({
-        key: item.key,
-        label: item.label,
-        children: item.children ? generateMenuItems(item.children) : undefined
-      }))
-  }
-
   return (
     <AntdLayout className={style.layoutContainer}>
       <Header className={style.layoutHeader}>
-        <h3>My App</h3>
+        <Flex align='center' justify='space-between' className={style.header}>
+          <Flex align='center' gap='8px'>
+            {logo.img}
+            <Typography.Title level={3} className={style.logoText}>
+              {logo.text}
+            </Typography.Title>
+          </Flex>
+        </Flex>
       </Header>
       <AntdLayout className={style.midLayout}>
         <Sider className={style.layoutSider} width={200} style={{ background: colorBgContainer }}>
-          <Menu theme='light' mode='inline' items={generateMenuItems(menuItems)} onClick={handleMenuClick} />
+          <Menu theme='light' mode='inline' items={menuItems} onClick={menuClick} />
         </Sider>
         <AntdLayout className={style.layoutMid}>
           <Breadcrumb items={[{ title: 'Home' }, { title: 'List' }, { title: 'App' }]} style={{ margin: '16px 0' }} />
